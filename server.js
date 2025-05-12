@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import connectDB from './config/db.js';
 import testRoutes from './routes/testRoutes.js';
 import authRoutes from './routes/authRoutes.js';
+import errorMiddleware from './middleware/errorMiddleware.js';
 
 const app = express();
 dotenv.config()
@@ -16,6 +17,8 @@ app.use(morgan('dev'))
 
 app.use('/api/v1/test', testRoutes)
 app.use('/api/v1/auth', authRoutes)
+
+app.use(errorMiddleware)
 
 const port = process.env.PORT || 8080
 
